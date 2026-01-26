@@ -8,7 +8,7 @@
   [![Next.js](https://img.shields.io/badge/Next.js-14.0-black?style=flat-square&logo=next.js)](https://nextjs.org/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.3-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
-  [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+  [![License]()](LICENSE)
 
   [Live Demo](#quick-start) · [Documentation](docs/README.md) · [Report Bug](https://github.com/yourusername/hydrosync/issues) · [Request Feature](https://github.com/yourusername/hydrosync/issues)
 
