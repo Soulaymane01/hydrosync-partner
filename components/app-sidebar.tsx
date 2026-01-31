@@ -221,9 +221,16 @@ export function AppSidebar() {
     setUser(currentUser)
   }, [])
 
-  const handleLogout = () => {
-    localStorage.removeItem("hydrosync-user")
-    router.push("/")
+  const handleLogout = async () => {
+    try {
+      const api = (await import("@/lib/api")).default
+      await api.post("/auth/logout")
+    } catch (e) {
+      console.error("Logout failed", e)
+    } finally {
+      localStorage.removeItem("hydrosync-user")
+      router.push("/")
+    }
   }
 
   const filterItemsByPermission = (items: any[]) => {
