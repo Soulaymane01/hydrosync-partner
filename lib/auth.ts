@@ -8,6 +8,8 @@ export interface User {
   permissions: Permission[]
   lastLogin?: string
   status: "active" | "inactive" | "suspended"
+  token?: string
+  refresh?: string
 }
 
 export interface UserRole {

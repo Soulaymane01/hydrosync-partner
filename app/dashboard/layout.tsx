@@ -22,21 +22,9 @@ export default function DashboardLayout({
 
   useEffect(() => {
     const currentUser = getCurrentUser()
-    if (currentUser) {
-      // If user doesn't have proper role structure, update it
-      if (!currentUser.role || !currentUser.permissions) {
-        const role = ROLES.find((r) => r.id === "admin") || ROLES[0]
-        const updatedUser = {
-          ...currentUser,
-          role,
-          permissions: role.permissions,
-          status: "active" as const,
-        }
-        localStorage.setItem("hydrosync-user", JSON.stringify(updatedUser))
-        setUser(updatedUser)
-      } else {
-        setUser(currentUser)
-      }
+    if (currentUser && currentUser.token) {
+      // Validate token presence
+      setUser(currentUser)
 
       // Check if user can access current route
       if (!canAccessRoute(currentUser, pathname)) {
@@ -46,6 +34,7 @@ export default function DashboardLayout({
 
       setIsAuthenticated(true)
     } else {
+      localStorage.removeItem("hydrosync-user") // Clean up if invalid
       router.push("/")
     }
   }, [router, pathname])
