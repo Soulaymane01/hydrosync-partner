@@ -24,30 +24,33 @@ export default function LoginPage() {
     setError("")
 
     try {
-      // Import api locally or at top level. Importing at top level for this file.
-      // Dynamic import to avoid issues if api.ts has issues, but top level is standard.
-      const api = (await import("@/lib/api")).default
-
-      const response = await api.post("/auth/login", { email, password })
-
-      if (response.data.success) {
-        const { token, refresh, user } = response.data
-
-        // Transform backend user to frontend expected format
-        const frontendUser = {
-          ...user,
-          token, // Store token with user for simple retrieval in this app
-          refresh,
-          loggedIn: true,
-          status: "active"
+      // Deactivated real API login for frontend-only hosting
+      // We'll use local validation for demonstration
+      if (email === "admin@hydrosync.com" && password === "admin123") {
+        const dummyUser = {
+          id: "1",
+          name: "System Administrator",
+          email: "admin@hydrosync.com",
+          role: {
+            id: "admin",
+            name: "System Administrator",
+            level: 5,
+            description: "Full system access",
+            permissions: [{ id: "all", name: "All", resource: "*", action: "*", description: "all" }]
+          },
+          token: "dummy-jwt-token",
+          status: "active",
+          loggedIn: true
         }
 
-        localStorage.setItem("hydrosync-user", JSON.stringify(frontendUser))
+        localStorage.setItem("hydrosync-user", JSON.stringify(dummyUser))
         router.push("/dashboard")
+      } else {
+        setError("Invalid credentials. Please use admin@hydrosync.com / admin123")
       }
     } catch (err: any) {
       console.error("Login failed", err)
-      setError(err.response?.data?.message || "Invalid credentials. Please try again.")
+      setError("An unexpected error occurred.")
     } finally {
       setIsLoading(false)
     }
@@ -127,9 +130,10 @@ export default function LoginPage() {
 
           {/* Demo Credentials Hint */}
           <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-            <h4 className="text-sm font-medium mb-2">Login:</h4>
+            <h4 className="text-sm font-medium mb-2">Test Credentials:</h4>
             <div className="text-xs text-gray-600">
-              Use your registered credentials.
+              Email: <span className="font-mono font-bold">admin@hydrosync.com</span><br />
+              Password: <span className="font-mono font-bold">admin123</span>
             </div>
           </div>
         </CardContent>

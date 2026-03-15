@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import type { DateRange } from "react-day-picker"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -142,6 +143,7 @@ const assetDetails = [
 
 export default function AssetsPage() {
   const [selectedAsset, setSelectedAsset] = useState(assetDetails[0])
+  const [date, setDate] = useState<DateRange | undefined>()
 
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
@@ -436,7 +438,7 @@ export default function AssetsPage() {
                       <SelectItem value="inspection">Inspection</SelectItem>
                     </SelectContent>
                   </Select>
-                  <DatePickerWithRange />
+                  <DatePickerWithRange date={date} onDateChange={setDate} />
                 </div>
                 <Button>
                   <Calendar className="mr-2 h-4 w-4" />

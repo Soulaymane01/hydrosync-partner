@@ -7,7 +7,25 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, User, FileText } from "lucide-react"
 
 // Mock data - in real app, this would come from API
-const paymentData = {
+type Payment = {
+  id: string
+  date: string
+  time: string
+  amount: number
+  method: string
+  clientId: string
+  clientName: string
+  status: string
+  notes: string
+  invoiceId: string
+  netAmount: number
+  cardLast4?: string
+  transactionId?: string
+  processingFee?: number
+  lateFee?: number
+}
+
+const paymentData: Record<string, Payment> = {
   "PAY-1001": {
     id: "PAY-1001",
     date: "2024-01-15",
